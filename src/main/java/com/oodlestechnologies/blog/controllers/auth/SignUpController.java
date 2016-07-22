@@ -13,7 +13,4 @@ public class SignUpController {
     public String index(){
         return "user/signup";
     }
-
-
-
 }
