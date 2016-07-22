@@ -1,0 +1,16 @@
+<HTML>
+<body>
+    <Div>
+        <h3>Login:</h3>
+    </div>
+     <Div>
+
+        <input type="text" placeholder="username">
+        <input type="passoword" placeholder="password"><br>
+        <br>
+        <button>Login</button>
+        </div>
+
+This is Login Page from VM
+</body>
+</HTML>
