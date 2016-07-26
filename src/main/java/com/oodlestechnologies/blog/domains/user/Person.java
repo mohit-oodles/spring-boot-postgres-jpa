@@ -5,27 +5,37 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-
-
 @Entity
 public class Person {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-
+    private long id;
     private String username;
+    private String email;
     private String password;
     private String lastLogin;
+    private String passwordLastUpdate;
 
 
-
-    public int getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswordLastUpdate() {
+        return passwordLastUpdate;
+    }
+
+    public void setPasswordLastUpdate(String passwordLastUpdate) {
+        this.passwordLastUpdate = passwordLastUpdate;
+    }
+
+    public long getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -51,4 +61,6 @@ public class Person {
     public void setLastLogin(String lastLogin) {
         this.lastLogin = lastLogin;
     }
+
+
 }
