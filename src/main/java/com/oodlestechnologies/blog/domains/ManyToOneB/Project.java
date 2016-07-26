@@ -46,4 +46,7 @@ public class Project {
     @ManyToOne
     Employee employee;
 
+    public Employee getEmployee() {
+        return employee;
+    }
 }
