@@ -47,9 +47,11 @@ public class CController {
         B b = new B();
         b.setName("First");
         b.setOtherValue("Any Value");
+        // B1
         B b1 = new B();
         b1.setName("Second");
         b1.setOtherValue("Any Value");
+        // B2
         B b2 = new B();
         b2.setName("Third");
         b2.setOtherValue("Any Value");
@@ -62,10 +64,12 @@ public class CController {
 
 
         // Create Many C
+        // C1
         C c1 = new C();
         c1.setName("C First");
         c1.setAddress("Kanpur");
         c1.setAnotherProperty("Yes");
+        // C2
         C c2 = new C();
         c2.setName("C First");
         c2.setAddress("Kanpur");
