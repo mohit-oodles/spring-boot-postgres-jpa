@@ -1,6 +1,12 @@
 package com.oodlestechnologies.blog.domains.One2OneU;
 
+import com.oodlestechnologies.blog.domains.ManyToOneB.Project;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import java.util.Collection;
 
 /**
  * Created by oodles on 25/7/16.
@@ -8,6 +14,10 @@ import javax.persistence.*;
 
 @Entity
 public class Employee {
+
+    public  Employee(long id){
+        this.empID = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,10 +60,29 @@ public class Employee {
         this.age = age;
     }
 
-    @OneToOne
+    @OneToOne(orphanRemoval=true)
+    @Cascade(CascadeType.ALL)
     BankAccount bankAccount;
 
     public BankAccount getBankAccount() {
         return bankAccount;
     }
+
+    public void setBankAccount(BankAccount bankAccount) {
+        this.bankAccount = bankAccount;
+    }
+
+
+    @OneToMany()
+    @Cascade(CascadeType.ALL)
+
+    Collection<Project> projects;
+    public Collection<Project> getProjects() {
+        return projects;
+    }
+    public void setProjects(Collection<Project> projects) {
+        this.projects = projects;
+    }
+
+
 }

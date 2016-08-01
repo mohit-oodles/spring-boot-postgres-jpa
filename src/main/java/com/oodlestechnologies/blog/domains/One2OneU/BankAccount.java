@@ -1,9 +1,9 @@
 package com.oodlestechnologies.blog.domains.One2OneU;
 
+import org.hibernate.annotations.*;
+
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Created by oodles on 25/7/16.
@@ -53,4 +53,6 @@ public class BankAccount {
     }
 
 
+    @OneToOne(orphanRemoval=true)
+    Employee employee;
 }

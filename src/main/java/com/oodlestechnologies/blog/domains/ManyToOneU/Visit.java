@@ -1,8 +1,11 @@
 package com.oodlestechnologies.blog.domains.ManyToOneU;
 
 import com.oodlestechnologies.blog.domains.One2OneU.Employee;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 
 @Entity
@@ -48,12 +51,18 @@ public class Visit {
     }
 
     float totalExpenses;
-
-
-    @ManyToOne
-    Employee employee;
-
-    public Employee getEmployee() {
-        return employee;
-    }
+//
+//
+//    @OneToOne
+//    @Cascade(CascadeType.DELETE)
+//    Employee employee;
+//
+//    public Employee getEmployee() {
+//        return employee;
+//    }
+//
+//    public void setEmployee(Employee employee) {
+//        this.employee = employee;
+//    }
 }
+

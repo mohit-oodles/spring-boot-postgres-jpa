@@ -17,6 +17,11 @@ jar {
     baseName = 'gs-spring-boot'
     version =  '0.1.0'
 }
+jar {
+    baseName = 'gs-device-detection'
+    version =  '0.1.0'
+}
+
 
 repositories {
     mavenCentral()
@@ -62,6 +67,10 @@ dependencies {
     compile group: 'org.postgresql', name: 'postgresql', version: '9.4.1209.jre7'
 
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+
+    // Detect Device
+    compile("org.springframework.mobile:spring-mobile-device")
+
 
 
 }

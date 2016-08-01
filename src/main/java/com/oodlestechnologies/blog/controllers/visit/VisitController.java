@@ -3,10 +3,7 @@ package com.oodlestechnologies.blog.controllers.visit;
 import com.oodlestechnologies.blog.domains.ManyToOneU.Visit;
 import com.oodlestechnologies.blog.repositories.visitManagement.VisitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -24,15 +21,24 @@ public class VisitController  {
 
     @RequestMapping( value = "{id}" ,method = RequestMethod.GET)
     Visit getVisit(@PathVariable long id){
-
         return visitRepository.findOne(id);
-
     }
+
+    @RequestMapping( value = "{id}" ,method = RequestMethod.DELETE)
+     void removeVisit(@PathVariable long id){
+        System.out.print("----------------------------------------------"+id);
+        visitRepository.delete(id);
+    }
+
 
     @RequestMapping( value = "/" ,method = RequestMethod.GET)
         ArrayList<Visit> getAllVisit(){
-
         return visitRepository.findAll();
+    }
 
+    @RequestMapping( value = "/" ,method = RequestMethod.POST)
+    Visit addVisit(@RequestBody Visit visit){
+       visitRepository.save(visit);
+        return  visit;
     }
 }

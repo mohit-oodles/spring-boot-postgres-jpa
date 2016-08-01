@@ -29,11 +29,17 @@ public class EmployeeController {
         Employee employee1 = null;
         if (employee!=null){
             employee1= employeeRepository.save(employee);
-
         }
         return  employee1;
     }
 
+
+//    @RequestMapping(value = "/test",method = RequestMethod.GET)
+//    void  getEmployee(){
+//        Employee employee =  new Em
+//
+//    }
+//
 
 
     @RequestMapping(value = "/",method = RequestMethod.GET)
@@ -51,6 +57,16 @@ public class EmployeeController {
             employee1= employeeRepository.findOne(Long.valueOf(id));
         }
         return  employee1;
+    }
+
+
+    @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
+    void deleteEmployee(@PathVariable int id){
+        if (id!=0){
+        employeeRepository.delete(Long.valueOf(id));
+        }
+
+
     }
 
 
