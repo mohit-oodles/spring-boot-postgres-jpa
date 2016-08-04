@@ -1,19 +1,26 @@
 package com.oodlestechnologies.blog.domains.One2OneU;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.oodlestechnologies.blog.domains.ManyToOneB.Project;
 import org.hibernate.annotations.*;
 import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
+import java.io.Serializable;
 import java.util.Collection;
 
 /**
  * Created by oodles on 25/7/16.
  */
 
+
 @Entity
-public class Employee {
+public class Employee implements Serializable {
+
+    public  Employee(){
+
+    }
 
     public  Employee(long id){
         this.empID = id;
@@ -73,10 +80,10 @@ public class Employee {
     }
 
 
-    @OneToMany()
+    @OneToMany(fetch = FetchType.EAGER)
     @Cascade(CascadeType.ALL)
-
     Collection<Project> projects;
+
     public Collection<Project> getProjects() {
         return projects;
     }

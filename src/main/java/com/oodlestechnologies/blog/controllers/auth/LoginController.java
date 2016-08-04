@@ -1,35 +1,40 @@
 package com.oodlestechnologies.blog.controllers.auth;
+import com.oodlestechnologies.blog.config.security.AppSecurityConfig;
 import com.oodlestechnologies.blog.domains.user.Person;
 import com.oodlestechnologies.blog.repositories.userManagement.PersonRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 
-@RestController
+@Controller
 public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    PersonRepository personRepyositor;
-
-    @RequestMapping(value="/login" ,method=RequestMethod.POST)
-    @ResponseBody
-    Person checkLogin(@RequestBody Person person)
+    @RequestMapping(value="/login" ,method = RequestMethod.POST)
+    String checkLogin(@RequestParam("username") String username,@RequestParam("password") String password)
     {
-        Person p = new Person();
-        if (person!=null){
-            person.setUsername("mohit");
-            Date date =new Date();
-            person.setLastLogin(String.valueOf(date.toString()));
-            logger.info("result",p.getUsername());
+        String result = "invalid";
+        // Spring security UserT details service, UserAuthenticationProvider
+        System.out.print("----:\n"+"UserT: "+username+"\npass: "+password+"----");
+        if (username.equals("mohi")&& password.equals("pass")){
+            result="auth/success";
         }
         else{
-            person.setUsername("Invalid Person");
+            result="auth/failure";
         }
-        return p;
+        return result;
     }
+
+
+    @RequestMapping(value="/login" ,method = RequestMethod.GET)
+    String login() {
+        return "auth/login";
+    }
+
 }
 

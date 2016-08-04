@@ -28,7 +28,21 @@ public class ProjectController {
    // GET ALL
     @RequestMapping(value = ("/"),method = RequestMethod.GET)
     ArrayList<Project> getAllProject(){
-        return projectRepository.findAll();
+        ArrayList<Project> projects =  projectRepository.findAll();
+////        Project p = projectRepository.findOne(Long.valueOf(70));
+////        p.setProjectName("Name Update");
+////        projectRepository.save(p);
+//
+//        for (Project project:projects
+//             ) {
+//            System.out.print(project.getProjectName());
+//            if (project.getProjectId() == 70){
+//                projects.remove(1)    ;
+//            }
+
+//        }
+        return projects;
+
     }
 
     // PUT

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Timer;
+import java.util.concurrent.TimeUnit;
 
 
 @RestController
@@ -29,39 +31,12 @@ public class CController {
     @Autowired
     ARepository aRepository;
 
-
+    ArrayList<C> clist;
     @RequestMapping(value = "/", method = RequestMethod.POST)
     C addC(@RequestBody C c) {
 
         Collection<B> bCollection = null;
         Collection<C> cCollection = null;
-
-        //Create A
-        A a = new A();
-        a.setName("Sanjay mishra");
-        a.setAddress("Ghaziabad");
-        // Adding B's to A
-        a.setBs(bCollection);
-
-        // Create Many B
-        B b = new B();
-        b.setName("First");
-        b.setOtherValue("Any Value");
-        // B1
-        B b1 = new B();
-        b1.setName("Second");
-        b1.setOtherValue("Any Value");
-        // B2
-        B b2 = new B();
-        b2.setName("Third");
-        b2.setOtherValue("Any Value");
-        bCollection = new ArrayList<>();
-        bCollection.add(b);
-        bCollection.add(b1);
-        bCollection.add(b2);
-        // Adding C's to B
-        b.setCs(cCollection);
-
 
         // Create Many C
         // C1
@@ -84,15 +59,96 @@ public class CController {
         cCollection.add(c2);
 
 
-        aRepository.save(a);
+        // Create Many B
+        B b = new B();
+        b.setName("First");
+        b.setOtherValue("Any Value");
+        // B1
+        B b1 = new B();
+        b1.setName("Second");
+        b1.setOtherValue("Any Value");
+        // B2
+        B b2 = new B();
+        b2.setName("Third");
+        b2.setOtherValue("Any Value");
+        bCollection = new ArrayList<>();
+        bCollection.add(b);
+        bCollection.add(b1);
+        bCollection.add(b2);
+        // Adding C's to B
+        b.setCs(cCollection);
 
+
+
+        //Create A
+        A a = new A();
+        a.setName("Sanjay mishra");
+        a.setAddress("Ghaziabad");
+        // Adding B's to A
+        a.setBs(bCollection);
+
+
+        aRepository.save(a);
         return c;
     }
 
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     ArrayList<C> getAllC(){
-     return cRepository.findAll();
 
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                C c=  new C();
+                c.setName("runnable");
+                cRepository.save(c);
+            }
+        });
+
+
+
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+            cRepository.delete(Long.valueOf(106));
+            }
+        });
+
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                clist = cRepository.findAll();
+            }
+        });
+
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        clist = cRepository.findAll();
+                    }
+                },
+                1000
+        );
+
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        cRepository.delete(Long.valueOf(106));
+                    }
+                },
+                1000
+        );
+
+//
+//        thread.start();
+//        thread1.start();
+//        thread2.start();
+
+        return clist;
     }
+
 }

@@ -11,6 +11,6 @@ public class SignUpController {
 
     @RequestMapping("/register")
     public String index(){
-        return "user/signup";
+        return "UserT/signup";
     }
 }

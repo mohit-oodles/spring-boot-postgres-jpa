@@ -1,15 +1,20 @@
 package com.oodlestechnologies.blog.domains.ManyToOneB;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.oodlestechnologies.blog.domains.One2OneU.Employee;
 import com.oodlestechnologies.blog.repositories.employeeManagement.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.*;
+import javax.persistence.criteria.Fetch;
+import java.io.Serializable;
 import java.util.Collection;
 
 
 @Entity
-public class Project {
+
+public class Project implements Serializable {
         public Project(){
         }
 
@@ -49,7 +54,7 @@ public class Project {
     }
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     Employee employee;
 
     public Employee getEmployee() {
@@ -59,4 +64,14 @@ public class Project {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
+    //    Collection<Employee> employees;
+//
+//    public Collection<Employee> getEmployees() {
+//        return employees;
+//    }
+//
+//    public void setEmployees(Collection<Employee> employees) {
+//        this.employees = employees;
+//    }
 }

@@ -1,4 +1,4 @@
-package com.oodlestechnologies.blog.controllers.users;
+package com.oodlestechnologies.blog.controllers.Person;
 import com.oodlestechnologies.blog.domains.user.Person;
 import com.oodlestechnologies.blog.repositories.userManagement.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/Person")
+public class PersonController {
 
     @Autowired
     PersonRepository personRepository;

@@ -49,14 +49,34 @@ dependencies {
 
     // Required for XML parsing
 
-// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-   compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.4'
-// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
-   compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.4'
+//// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+//   compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.4'
+//// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+//   compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.7.4'
+//// https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml
+//   compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.7.4'
+//// https://mvnrepository.com/artifact/org.codehaus.janino/janino
+//  compile group: 'org.codehaus.janino', name: 'janino', version: '2.7.8'
+
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.5.4'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.5.4'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.5.4'
+
 // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml
-   compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.7.4'
+    compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-xml', version: '2.5.4'
+
 // https://mvnrepository.com/artifact/org.codehaus.janino/janino
-  compile group: 'org.codehaus.janino', name: 'janino', version: '2.7.8'
+    compile group: 'org.codehaus.janino', name: 'janino', version: '2.6.1'
+
+
+
+
 
     // Postgresql Driver
 
@@ -70,6 +90,13 @@ dependencies {
 
     // Detect Device
     compile("org.springframework.mobile:spring-mobile-device")
+
+// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security
+    compile ('org.springframework.boot:spring-boot-starter-security')
+
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-hibernate4
+    compile group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate4', version: '2.7.6'
 
 
 

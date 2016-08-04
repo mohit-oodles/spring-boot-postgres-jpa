@@ -12,6 +12,7 @@ public class C {
 //
 //    }
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     long id;
