@@ -15,22 +15,22 @@ import java.util.Date;
 public class LoginController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    @RequestMapping(value="/login" ,method = RequestMethod.POST)
-    String checkLogin(@RequestParam("username") String username,@RequestParam("password") String password)
-    {
-        String result = "invalid";
-        // Spring security UserT details service, UserAuthenticationProvider
-        System.out.print("----:\n"+"UserT: "+username+"\npass: "+password+"----");
-        if (username.equals("mohi")&& password.equals("pass")){
-            result="auth/success";
-        }
-        else{
-            result="auth/failure";
-        }
-        return result;
-    }
+//    @RequestMapping(value="/login" ,method = RequestMethod.POST)
+//    String checkLogin(@RequestParam("username") String username,@RequestParam("password") String password)
+//    {
+//        String result = "invalid";
+//        // Spring security UserT details service, UserAuthenticationProvider
+//        System.out.print("----:\n"+"UserT: "+username+"\npass: "+password+"----");
+//        if (username.equals("mohi")&& password.equals("pass")){
+//            result="auth/success";
+//        }
+//        else{
+//            result="auth/failure";
+//        }
+//        return result;
+//    }
 
-
+    // Take to the login vm
     @RequestMapping(value="/login" ,method = RequestMethod.GET)
     String login() {
         return "auth/login";

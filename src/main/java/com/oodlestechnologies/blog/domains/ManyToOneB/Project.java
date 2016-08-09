@@ -54,7 +54,7 @@ public class Project implements Serializable {
     }
 
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     Employee employee;
 
     public Employee getEmployee() {

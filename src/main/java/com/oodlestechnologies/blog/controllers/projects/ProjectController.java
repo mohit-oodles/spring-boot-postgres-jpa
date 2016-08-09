@@ -2,6 +2,7 @@ package com.oodlestechnologies.blog.controllers.projects;
 
 import com.oodlestechnologies.blog.domains.ManyToOneB.Project;
 import com.oodlestechnologies.blog.repositories.projectManagement.ProjectRepository;
+import com.oodlestechnologies.blog.services.project.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,52 +18,31 @@ import java.util.ArrayList;
 public class ProjectController {
 
     @Autowired
-    ProjectRepository projectRepository;
+    ProjectService projectService;
 
-    // GET
-   @RequestMapping(value = ("{id}"),method = RequestMethod.GET)
-   Project getProject(@PathVariable long id){
-       return projectRepository.findOne(id);
-   }
-
-   // GET ALL
-    @RequestMapping(value = ("/"),method = RequestMethod.GET)
-    ArrayList<Project> getAllProject(){
-        ArrayList<Project> projects =  projectRepository.findAll();
-////        Project p = projectRepository.findOne(Long.valueOf(70));
-////        p.setProjectName("Name Update");
-////        projectRepository.save(p);
-//
-//        for (Project project:projects
-//             ) {
-//            System.out.print(project.getProjectName());
-//            if (project.getProjectId() == 70){
-//                projects.remove(1)    ;
-//            }
-
-//        }
-        return projects;
-
-    }
-
-    // PUT
-    @RequestMapping(value = ("/"),method = RequestMethod.PUT)
-    Project updateProject(@RequestBody Project project){
-        Project tempProject= projectRepository.findOne(project.getProjectId());
-        tempProject = project;
-        return projectRepository.save(tempProject);
-    }
-
-    //POST
     @RequestMapping(value = ("/"),method = RequestMethod.POST)
     Project addProject(@RequestBody Project project){
-        return projectRepository.save(project);
+        return projectService.createProject(project);
     }
 
-    // Delete
+    @RequestMapping(value = ("/"),method = RequestMethod.GET)
+    ArrayList<Project> getAllProject(){
+        return  projectService.getAllProjects();
+    }
+
+   @RequestMapping(value = ("{id}"),method = RequestMethod.GET)
+   Project getProject(@PathVariable long id){
+       return projectService.getProject(id);
+   }
+
+    @RequestMapping(value = ("/"),method = RequestMethod.PUT)
+    Project updateProject(@RequestBody Project project){
+        return projectService.updateProject(project);
+    }
+
     @RequestMapping(value = ("{id}"),method = RequestMethod.DELETE)
     void removeProject(@PathVariable long id){
-         projectRepository.delete(id);
+        projectService.removeProject(id);
     }
 
 }

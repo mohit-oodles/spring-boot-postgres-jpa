@@ -1,6 +1,7 @@
 package com.oodlestechnologies.blog.domains.user;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -69,8 +70,8 @@ public class UserT {
         this.userEmail = userEmail;
     }
 
-    @ManyToMany
-    Collection<Role> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    Collection<Role> roles = new ArrayList<>();
 
     public Collection<Role> getRoles() {
         return roles;
