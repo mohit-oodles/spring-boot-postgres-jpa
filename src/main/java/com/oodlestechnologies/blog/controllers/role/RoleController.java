@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by oodles on 2/8/16.
  */
 
-@RequestMapping("role")
+@RequestMapping("api/v1/role")
 @RestController
 public class RoleController {
 
@@ -32,13 +32,13 @@ public class RoleController {
     }
 
     // FIND
-    @RequestMapping(value = "/{id}" ,method = RequestMethod.GET)
+    @RequestMapping(value = "{id}" ,method = RequestMethod.GET)
     Role getUser(@RequestParam Long id){
         return  roleRepository.findOne(id);
     }
 
     // DELETE
-    @RequestMapping(value = "/{id}" ,method = RequestMethod.DELETE)
+    @RequestMapping(value = "{id}" ,method = RequestMethod.DELETE)
     void removeUser(@RequestParam Long id){
         roleRepository.delete(id);
     }

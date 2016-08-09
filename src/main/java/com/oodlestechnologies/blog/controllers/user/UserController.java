@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("api/v1/user")
 public class UserController {
 
     @Autowired
@@ -31,13 +31,13 @@ public class UserController {
     }
 
     // FIND
-    @RequestMapping(value = "/{id}" ,method = RequestMethod.GET)
+    @RequestMapping(value = "{id}" ,method = RequestMethod.GET)
     UserT getUser(@RequestParam Long id){
         return  userRepository.findOne(id);
     }
 
     // DELETE
-    @RequestMapping(value = "/{id}" ,method = RequestMethod.DELETE)
+    @RequestMapping(value = "{id}" ,method = RequestMethod.DELETE)
     void removeUser(@RequestParam Long id){
         userRepository.delete(id);
     }

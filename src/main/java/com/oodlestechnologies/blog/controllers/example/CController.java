@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 
 
 @RestController
-@RequestMapping("/C")
+@RequestMapping("api/v1/C")
 
 public class CController {
 

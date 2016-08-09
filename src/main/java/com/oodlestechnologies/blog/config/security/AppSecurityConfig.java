@@ -1,10 +1,8 @@
 package com.oodlestechnologies.blog.config.security;
 
-import com.oodlestechnologies.blog.repositories.UserManagement.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,37 +17,36 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
-
-
-
  /*   protected void configure(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userDetailsServiceBean());
     }*/
-
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-            http.authorizeRequests()
-                .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/user/**").hasAuthority("ROLE_USER")
+
+        // Exclude API from Role based security.
+        http.authorizeRequests()
+                 .antMatchers("/api/v1/**").permitAll();
+        // Check Roles
+        http.authorizeRequests()
+                .antMatchers("/user/**").hasRole("USER").antMatchers("/admin/**").hasRole("ADMIN");
+        http.authorizeRequests()
                 .anyRequest().authenticated();
 
-            http
+        http
+                // for Login
                 .formLogin().failureUrl("/login")
                 .defaultSuccessUrl("/")
                 .loginPage("/login")
                 .permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login")
+                 // for logout
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
+                .and().logout().invalidateHttpSession(true).clearAuthentication(true)
                 .permitAll();
 
-            // Disable  CSRF (Cross Site Request Forgery) protection
-            http.csrf().disable();
-
-
+                 // Disable  CSRF (Cross Site Request Forgery) protection
+                 http.csrf().disable();
     }
-
-
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
             throws Exception {
@@ -58,7 +55,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
         // ShaPasswordEncoder encoder = new ShaPasswordEncoder();
         // auth.userDetailsService(userDetailsService).passwordEncoder(encoder);
     }
-
     @Bean
     CustomAuthenticationProvider authenticationProvider() {
         CustomAuthenticationProvider provider = new CustomAuthenticationProvider();

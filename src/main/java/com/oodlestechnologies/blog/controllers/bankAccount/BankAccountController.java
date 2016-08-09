@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("api/v1/accounts")
 public class BankAccountController {
 
     @Autowired

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 
 @RestController
-@RequestMapping("/visits")
+@RequestMapping("api/v1/visits")
 public class VisitController  {
 
     @Autowired

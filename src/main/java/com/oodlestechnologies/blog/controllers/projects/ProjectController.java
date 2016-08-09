@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 
 @RestController
-@RequestMapping("/projects")
+@RequestMapping("api/v1/projects")
 public class ProjectController {
 
     @Autowired

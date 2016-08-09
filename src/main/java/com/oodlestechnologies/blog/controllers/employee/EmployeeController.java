@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("api/v1/employee")
 public class EmployeeController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
