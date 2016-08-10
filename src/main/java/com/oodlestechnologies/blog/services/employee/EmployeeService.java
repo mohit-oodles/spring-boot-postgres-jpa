@@ -17,9 +17,15 @@ import java.util.ArrayList;
 @Service
 public class EmployeeService {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
     private EmployeeRepository employeeRepository;
             /* CRUD OPERATIONS*/
+
+
+    public void setEmployeeRepository(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
+    }
 
     public Employee createEmployee(Employee employee){
         employeeRepository.save(employee);

@@ -17,17 +17,12 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by oodles on 8/8/16.
- */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
-
     private static final Logger logger = LoggerFactory.getLogger(CustomAuthenticationProvider.class);
 
     @Autowired
     CustomUserDetailService customUserDetailService;
-
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -35,7 +30,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
         logger.debug("hi");
         List<GrantedAuthority> grantedAuths = new ArrayList<>();
-
         UserT user = customUserDetailService.loadUserByUsername(username, password);
 
         System.out.println("authenticated user information"+user);

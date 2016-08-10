@@ -8,21 +8,17 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-/**
- * Created by oodles on 1/8/16.
- */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableWebSecurity
 public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
- /*   protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userDetailsServiceBean());
-    }*/
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-
         // Exclude API from Role based security.
         http.authorizeRequests()
                  .antMatchers("/api/v1/**").permitAll();
@@ -31,7 +27,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/user/**").hasRole("USER").antMatchers("/admin/**").hasRole("ADMIN");
         http.authorizeRequests()
                 .anyRequest().authenticated();
-
         http
                 // for Login
                 .formLogin().failureUrl("/login")
@@ -43,9 +38,13 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/")
                 .and().logout().invalidateHttpSession(true).clearAuthentication(true)
                 .permitAll();
-
                  // Disable  CSRF (Cross Site Request Forgery) protection
                  http.csrf().disable();
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder;
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth)
@@ -60,5 +59,6 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter{
         CustomAuthenticationProvider provider = new CustomAuthenticationProvider();
         return provider;
     }
+
 
 }

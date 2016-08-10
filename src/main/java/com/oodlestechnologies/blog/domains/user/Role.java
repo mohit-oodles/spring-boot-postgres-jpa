@@ -1,6 +1,9 @@
 package com.oodlestechnologies.blog.domains.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -51,8 +54,9 @@ public class Role {
     }
 
     @ManyToMany
-    Collection<UserT> userTs;
+    Collection<UserT> userTs = new ArrayList<>();
 
+    @JsonIgnore
     public Collection<UserT> getUserTs() {
         return userTs;
     }

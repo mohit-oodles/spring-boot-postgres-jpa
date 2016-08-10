@@ -2,6 +2,7 @@ package com.oodlestechnologies.blog.controllers.user;
 import com.oodlestechnologies.blog.domains.user.UserT;
 import com.oodlestechnologies.blog.repositories.UserManagement.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class UserController {
     // SAVE
     @RequestMapping(value = "/" ,method = RequestMethod.POST)
     UserT addUser(@RequestBody UserT userT){
+        userT.setPassword(new BCryptPasswordEncoder().encode(userT.getPassword()    ));
         userRepository.save(userT);
         return userT;
     }
@@ -31,17 +33,15 @@ public class UserController {
     }
 
     // FIND
-    @RequestMapping(value = "{id}" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/{id}" ,method = RequestMethod.GET)
     UserT getUser(@RequestParam Long id){
         return  userRepository.findOne(id);
     }
 
     // DELETE
-    @RequestMapping(value = "{id}" ,method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{id}" ,method = RequestMethod.DELETE)
     void removeUser(@RequestParam Long id){
         userRepository.delete(id);
     }
-
-
 
 }

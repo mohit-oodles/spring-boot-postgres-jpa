@@ -42,4 +42,6 @@ public class RoleController {
     void removeUser(@RequestParam Long id){
         roleRepository.delete(id);
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.oodlestechnologies.blog.domains.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -70,9 +72,9 @@ public class UserT {
         this.userEmail = userEmail;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch=FetchType.EAGER)
     Collection<Role> roles = new ArrayList<>();
-
+    @JsonIgnore
     public Collection<Role> getRoles() {
         return roles;
     }
